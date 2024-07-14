@@ -11,8 +11,19 @@ import {
   UserPicture,
   Wrapper,
 } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({autenticado}) =>  {
+  const navigate = useNavigate();
+
+  const handleClickRegister = () => {
+    navigate('/register');
+  }
+
+  const handleClickSignIn = () => {
+    navigate('/login');
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -34,8 +45,8 @@ const Header = ({autenticado}) =>  {
         ) : (
         <>  
         <MenuRight href="$">Home</MenuRight>
-        <Button title="Entrar"/>
-        <Button title="Cadastrar"/>
+        <Button title="Entrar" onClick={handleClickSignIn}/>
+        <Button title="Cadastrar" onClick={handleClickRegister}/>
         </>
       )}
         
