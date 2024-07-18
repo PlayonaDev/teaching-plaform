@@ -6,7 +6,6 @@ import * as yup from "yup";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
-import { api } from "../../services/api"
 import { Column,
         Container, 
         CriarText, 
@@ -15,7 +14,10 @@ import { Column,
         SubtitleLogin,
         Title,
         TitleLogin,
-        Wrapper } from './styles'
+        Wrapper } from './styles';
+import { IFormData } from "./types";
+import {  useContext } from "react";
+import { AuthContext } from "../context/auth";
 
 const schema = yup.object({
   email: yup.string().email('email não é válido').required('Campo Obrigatório'),
@@ -23,24 +25,15 @@ const schema = yup.object({
 }).required();
 
 const Login = () => {
-  const navigate = useNavigate();
+  const { handleLogin } = useContext(AuthContext);
 
-  const { control, handleSubmit, formState: { errors, isValid } } = useForm({
+  const { control, handleSubmit, formState: { errors } } = useForm<IFormData>({
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
 
-  const onSubmit = async formData => {
-    try{
-      const { data } = await api.get(`users?email=${formData.email}&senha=${formData.password}`);
-       if(data.length === 1) {
-         navigate('/feed')
-       } else {
-         alert('Email ou senha inválido')
-       }
-    }catch{
-       alert('Houve um erro, tente novamente')
-  }
+  const onSubmit = async (formData: IFormData) => {
+    handleLogin(formData)
 };
 
   return(
@@ -55,7 +48,7 @@ const Login = () => {
       </Column>
       <Column>
       <Wrapper>
-        <TitleLogin>Vamos iniciar sua jornada Tech</TitleLogin>
+        <TitleLogin>Faça seu cadastro</TitleLogin>
         <SubtitleLogin>Faça seu login e make the change.</SubtitleLogin>
         <form onSubmit={handleSubmit(onSubmit)}>
         <Input name="email" errorMessage={errors?.email?.message} control={control} placeholder="E-mail" leftIcon={<MdEmail/>}/>

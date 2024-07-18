@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from '../Button';
 import logo from '../../assets/logo.png';
 import {
@@ -11,25 +11,20 @@ import {
   UserPicture,
   Wrapper,
 } from './styles';
-import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../pages/context/auth';
+import { Link } from 'react-router-dom';
 
-const Header = ({autenticado}) =>  {
-  const navigate = useNavigate();
-
-  const handleClickRegister = () => {
-    navigate('/register');
-  }
-
-  const handleClickSignIn = () => {
-    navigate('/login');
-  }
+const Header = () =>  {
+  const { user, handleSignOut } = useContext(AuthContext);
 
   return (
     <Wrapper>
       <Container>
       <Row>
+        <Link to="/">
         <img src={logo} alt="Logo da dio" />
-        {autenticado ?  (
+        </Link>
+        {user.id ?  (
           <>
           <BuscarInputContainer>
           <Input placeholder='Buscar...'/>
@@ -41,12 +36,16 @@ const Header = ({autenticado}) =>  {
         
       </Row>
       <Row>
-        {autenticado ? ( <UserPicture src="https://avatars.githubusercontent.com/u/73918074?v=4&size=64" />
+        {user.id ? ( 
+          <>
+          <UserPicture src="https://avatars.githubusercontent.com/u/73918074?v=4&size=64" />
+          <a href="/" onClick={handleSignOut}>Sair</a>
+          </>
         ) : (
         <>  
         <MenuRight href="$">Home</MenuRight>
-        <Button title="Entrar" onClick={handleClickSignIn}/>
-        <Button title="Cadastrar" onClick={handleClickRegister}/>
+        <Button title="Entrar"/>
+        <Button title="Cadastrar"/>
         </>
       )}
         

@@ -8,7 +8,6 @@ export const InputContainer = styled.div`
 
  display: flex;
  align-items: center;
- margin-bottom: 20px;
  padding: 5px;
 `
 
@@ -18,7 +17,12 @@ export const IconContainer = styled.div`
 
 export const ErrorText = styled.p`
   color: #FF0000;
-  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 5px;
+  background-color: #3B3450;
+  border-radius: 50px;
   margin: 5px 0;
 `
 

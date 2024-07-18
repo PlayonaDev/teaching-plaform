@@ -1,7 +1,7 @@
 {
   "users": [
-    { "id": 1, "name": "Vitor", "email": "vitorde@gmail.com", "senha": "3121546631" },
-    { "id": 2, "name": "Augusto", "email": "augustode@gmail.com", "senha": "43545644" },
-    { "id": 3, "name": "Nascimento", "email": "nascimento@gmail.com", "senha": "3121546631" }
+    { "id": 1, "name": "Vitor", "email": "vitorde@gmail.com", "password": "123456" },
+    { "id": 2, "name": "Augusto", "email": "augustode@gmail.com", "password": "43545644" },
+    { "id": 3, "name": "Nascimento", "email": "nascimento@gmail.com", "password": "3121546631" }
   ]
 }
